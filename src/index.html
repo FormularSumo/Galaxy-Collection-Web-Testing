@@ -61,8 +61,12 @@
         var loadingContext = document.getElementById('loadingCanvas').getContext('2d');
         function drawLoadingText(text) {
           var canvas = loadingContext.canvas;
-          canvas.width  = window.innerWidth;
-          canvas.height = window.innerHeight;
+          var ctx = canvas.getContext('2d');
+
+          canvas.width = Math.floor(window.innerWidth * window.devicePixelRatio);
+          canvas.height = Math.floor(window.innerHeight * window.devicePixelRatio);
+
+          ctx.scale( window.devicePixelRatio , window.devicePixelRatio );
 
           loadingContext.fillStyle = "rgb(142, 195, 227)";
           loadingContext.fillRect(0, 0, canvas.scrollWidth, canvas.scrollHeight);
