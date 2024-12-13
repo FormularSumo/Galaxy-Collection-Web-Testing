@@ -941,6 +941,7 @@ var Love = (function() {
                   canvas.width = w;
                   canvas.height = h;
                   var ctx = canvas.getContext("2d");
+                  ctx.scale( window.devicePixelRatio , window.devicePixelRatio );
                   var image = ctx.createImageData(w, h);
                   var data = image.data;
                   var src = pixels >> 2;
@@ -6018,6 +6019,7 @@ var Love = (function() {
                           canvas.width = img.width;
                           canvas.height = img.height;
                           var ctx = canvas.getContext("2d");
+                          ctx.scale( window.devicePixelRatio , window.devicePixelRatio );
                           ctx.drawImage(img, 0, 0);
                           Module["preloadedImages"][name] = canvas;
                           Browser.URLObject.revokeObjectURL(url);
@@ -6153,6 +6155,7 @@ var Love = (function() {
                       }
                   } else {
                       ctx = canvas.getContext("2d")
+                      ctx.scale( window.devicePixelRatio , window.devicePixelRatio );
                   }
                   if (!ctx) return null;
                   if (setInModule) {
@@ -9924,8 +9927,11 @@ var Love = (function() {
           function _emscripten_set_canvas_element_size(target, width, height) {
               var canvas = findCanvasEventTarget(target);
               if (!canvas) return -4;
-              canvas.width = width;
-              canvas.height = height;
+              canvas.width = window.innerWidth * window.devicePixelRatio;
+              canvas.height = window.innerHeight * window.devicePixelRatio;
+              // ctx.scale( window.devicePixelRatio , window.devicePixelRatio );
+              // canvas.style.width = (100) + "%";
+              // canvas.style.height = (100) + "%";
               return 0
           }
 
